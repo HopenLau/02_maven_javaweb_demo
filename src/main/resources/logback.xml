@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+     
+	<property name="LOG_HOME" value="src/main/resources/logs"/>
+	
+	<appender name="suscceedLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<encoding>UTF-8</encoding>-->
+        <File>${LOG_HOME}/upload_s.log</File>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/upload_s.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>20</maxHistory>
+        </rollingPolicy>
+    </appender>
+	<logger name="suscceedLog" level="INFO" additivity="false">
+        <appender-ref ref="suscceedLogAppender"/>
+    </logger>
+
+
+
+	<appender name="failedLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<encoding>UTF-8</encoding>-->
+        <File>${LOG_HOME}/upload_f.log</File>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/upload_f.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>20</maxHistory>
+        </rollingPolicy>
+    </appender>
+	<logger name="failedLog" level="INFO" additivity="false">
+        <appender-ref ref="failedLogAppender"/>
+    </logger>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender"> 
+		<encoder> 
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{35} - %msg %n</pattern> 
+		</encoder> 
+　　　</appender>
+	<root level="INFO"> 
+		<appender-ref ref="STDOUT" /> 
+	</root> 
+</configuration>
